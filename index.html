@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>端午安康掌上遊藝</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        classic: {
+                            paper: '#fbf7ee',     // 宣紙黃
+                            red: '#c12c1f',       // 硃砂紅
+                            green: '#2d6a4f',     // 翡翠綠
+                            gold: '#d4a373',      // 溫潤金
+                            charcoal: '#2b2d42',  // 墨黑
+                            clay: '#e07a5f',      // 磚紅
+                            blue: '#4a6fa5'       // 靛青
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Noto Serif TC', 'PingFang TC', 'Microsoft JhengHei', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght=400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* 宣紙背景與底紋 */
+        body {
+            font-family: 'Noto Serif TC', serif;
+            background-color: #fbf7ee;
+            background-image: radial-gradient(#e9e0cd 1px, transparent 1px);
+            background-size: 24px 24px;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* 自訂滾動條 */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4a373;
+            border-radius: 10px;
+        }
+
+        /* 雙線古風邊框 */
+        .classic-border {
+            border: 3px double #d4a373;
+            border-radius: 16px;
+        }
+
+        /* 飄浮動畫 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* 輕微擺動動畫 */
+        @keyframes wobble {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        .animate-wobble {
+            animation: wobble 1s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-between min-h-screen text-classic-charcoal pb-6">
+
+    <!-- 頂部古風裝飾與標題 -->
+    <header class="w-full max-w-md px-6 pt-6 flex flex-col items-center relative">
+        <div class="absolute top-2 left-6 opacity-40">
+            <svg class="w-12 h-8 text-classic-gold" fill="currentColor" viewBox="0 0 100 50">
+                <path d="M20,30 C20,20,35,15,45,25 C50,15,70,10,80,25 C90,20,100,30,95,40 C90,48,70,48,60,40 C50,50,30,48,20,30 Z" />
+            </svg>
+        </div>
+        <div class="absolute top-4 right-6 opacity-40">
+            <svg class="w-16 h-10 text-classic-gold" fill="currentColor" viewBox="0 0 100 50">
+                <path d="M10,25 C15,10,35,10,45,20 C55,10,75,15,80,30 C85,42,65,45,50,40 C35,45,15,40,10,25 Z" />
+            </svg>
+        </div>
+
+        <div class="bg-classic-red text-white py-1 px-4 rounded-b-md shadow-md mb-2 text-xs tracking-widest font-bold">
+            歲時佳節 · 五月初五
+        </div>
+        <h1 class="text-3xl font-black text-classic-red flex items-center gap-1 tracking-wider">
+            <span>端午安康</span>
+            <span class="text-xs border border-classic-red px-1 rounded text-classic-red bg-white self-center scale-90">掌上民俗</span>
+        </h1>
+        <p class="text-xs text-classic-gold mt-1 font-bold">一指穿梭古今 ‧ 趣玩端陽習俗</p>
+    </header>
+
+    <!-- 核心內容展示區 -->
+    <main class="w-full max-w-md px-4 flex-grow flex items-center justify-center my-4">
+        <div class="w-full bg-[#fdfaf2] classic-border p-4 shadow-xl min-h-[520px] flex flex-col justify-between relative overflow-hidden">
+            
+            <div class="absolute top-1 left-1 text-classic-gold opacity-30 select-none">✦</div>
+            <div class="absolute top-1 right-1 text-classic-gold opacity-30 select-none">✦</div>
+            <div class="absolute bottom-1 left-1 text-classic-gold opacity-30 select-none">✦</div>
+            <div class="absolute bottom-1 right-1 text-classic-gold opacity-30 select-none">✦</div>
+
+            <!-- ================= 主首頁 (HOME) ================= -->
+            <div id="page-home" class="page-content flex flex-col items-center justify-center flex-grow py-4">
+                <div class="relative w-44 h-44 mb-2 animate-float flex items-center justify-center">
+                    <!-- 可愛肉粽 SVG -->
+                    <svg viewBox="0 0 120 120" class="w-full h-full">
+                        <path d="M15,90 Q 60,-10 105,90" fill="#2d6a4f" opacity="0.9" />
+                        <path d="M25,95 Q 60,35 95,95" fill="#40916c" />
+                        <path d="M60,25 L35,85 Q60,95 85,85 Z" fill="#fff5eb" stroke="#d4a373" stroke-width="2" />
+                        <path d="M48,55 Q60,65 72,55" stroke="#c12c1f" stroke-width="2" fill="none" />
+                        <path d="M46,65 Q60,75 74,65" stroke="#c12c1f" stroke-width="2" fill="none" />
+                        <circle cx="48" cy="74" r="5" fill="#f28482" opacity="0.6" />
+                        <circle cx="72" cy="74" r="5" fill="#f28482" opacity="0.6" />
+                        <circle cx="50" cy="68" r="3" fill="#2b2d42" />
+                        <circle cx="70" cy="68" r="3" fill="#2b2d42" />
+                        <path d="M48,63 Q50,61 52,63" stroke="#2b2d42" stroke-width="1.5" fill="none" />
+                        <path d="M68,63 Q70,61 72,63" stroke="#2b2d42" stroke-width="1.5" fill="none" />
+                        <path d="M57,75 Q60,79 63,75" stroke="#2b2d42" stroke-width="2" fill="none" />
+                        <circle cx="32" cy="75" r="4" fill="#fff5eb" stroke="#d4a373" />
+                        <circle cx="88" cy="75" r="4" fill="#fff5eb" stroke="#d4a373" />
+                    </svg>
+                    <div class="absolute -top-1 -right-4 bg-classic-red text-white text-[10px] px-2 py-1 rounded-full shadow-md rotate-12">
+                        雄黃酒來一杯？
+                    </div>
+                </div>
+
+                <div class="text-center px-4 mb-3">
+                    <p class="text-sm text-classic-charcoal leading-relaxed">
+                        「重五山林披翠綠，龍舟鼓響祭長江。」<br>
+                        端午不只是吃肉粽，還有許多好玩的民俗文化與美麗傳說！快點擊下方開始探索吧。
+                    </p>
+                </div>
+
+                <!-- 五大入口按鈕 -->
+                <div class="grid grid-cols-2 gap-3 w-full px-2 mt-2">
+                    <button onclick="switchPage('origin')" class="bg-white border-2 border-classic-green hover:bg-classic-green hover:text-white transition-all py-2 px-2 rounded-xl flex flex-col items-center justify-center shadow-sm">
+                        <span class="text-xl">📜</span>
+                        <span class="font-bold text-sm mt-1 text-classic-green">端午尋源</span>
+                        <span class="text-[9px] opacity-75">歷史故事與傳說</span>
+                    </button>
+                    <button onclick="switchPage('custom')" class="bg-white border-2 border-classic-red hover:bg-classic-red hover:text-white transition-all py-2 px-2 rounded-xl flex flex-col items-center justify-center shadow-sm">
+                        <span class="text-xl">🎋</span>
+                        <span class="font-bold text-sm mt-1 text-classic-red">民俗百寶箱</span>
+                        <span class="text-[9px] opacity-75">掛艾草與避邪儀式</span>
+                    </button>
+                    <button onclick="switchPage('zongzi')" class="bg-white border-2 border-classic-gold hover:bg-classic-gold hover:text-white transition-all py-2 px-2 rounded-xl flex flex-col items-center justify-center shadow-sm">
+                        <div class="flex items-center justify-center w-7 h-7">
+                            <svg viewBox="0 0 100 100" class="w-full h-full fill-current text-amber-700">
+                                <path d="M50,15 L15,80 Q50,95 85,80 Z" />
+                                <path d="M40,55 Q50,62 60,55" stroke="#fff" stroke-width="4" fill="none" />
+                            </svg>
+                        </div>
+                        <span class="font-bold text-sm mt-1 text-classic-gold">台灣粽大觀</span>
+                        <span class="text-[9px] opacity-75">南北粽深度對決</span>
+                    </button>
+                    <button onclick="switchPage('play')" class="bg-white border-2 border-classic-clay hover:bg-classic-clay hover:text-white transition-all py-2 px-2 rounded-xl flex flex-col items-center justify-center shadow-sm">
+                        <span class="text-xl">🥚</span>
+                        <span class="font-bold text-sm mt-1 text-classic-clay">端陽遊藝房</span>
+                        <span class="text-[9px] opacity-75">立蛋、手作香包</span>
+                    </button>
+                    <button onclick="switchPage('poetry')" class="col-span-2 bg-classic-blue/10 border-2 border-classic-blue hover:bg-classic-blue hover:text-white transition-all py-2.5 px-2 rounded-xl flex flex-row items-center justify-center gap-2 shadow-sm">
+                        <span class="text-xl">📖</span>
+                        <span class="font-bold text-sm text-classic-blue">詩詞辭典與端陽科舉</span>
+                        <span class="text-[10px] opacity-80 bg-classic-blue text-white px-1.5 py-0.5 rounded font-bold">New</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ================= 1. 端午尋源 (ORIGIN) - 完整修復與重構 ================= -->
+            <div id="page-origin" class="page-content hidden flex-col justify-between flex-grow">
+                <div>
+                    <div class="flex items-center justify-between border-b-2 border-classic-gold pb-2 mb-3">
+                        <h2 class="text-lg font-bold text-classic-red flex items-center gap-1">
+                            <span>📜</span> 端午之源 · 歷史與傳說
+                        </h2>
+                        <button onclick="switchPage('home')" class="text-xs bg-classic-gold text-white px-2 py-1 rounded">返回</button>
+                    </div>
+
+                    <!-- 人物切換 Tab -->
+                    <div class="flex justify-around mb-3 bg-white p-1 rounded-lg border border-classic-gold/30">
+                        <button onclick="showOrigin('quyuan')" id="tab-quyuan" class="origin-tab px-3 py-1 text-xs font-bold rounded-md bg-classic-red text-white">屈原</button>
+                        <button onclick="showOrigin('wuzixu')" id="tab-wuzixu" class="origin-tab px-3 py-1 text-xs font-bold rounded-md text-classic-charcoal">伍子胥</button>
+                        <button onclick="showOrigin('caoe')" id="tab-caoe" class="origin-tab px-3 py-1 text-xs font-bold rounded-md text-classic-charcoal">曹娥</button>
+                    </div>
+
+                    <!-- 內容卡片 -->
+                    <div class="bg-white p-4 rounded-xl border border-classic-gold/50 shadow-sm min-h-[200px] flex flex-col justify-between">
+                        <!-- 屈原 -->
+                        <div id="origin-quyuan" class="origin-detail flex flex-col gap-2">
+                            <div class="flex items-center gap-3">
+                                <div class="w-16 h-16 bg-classic-paper border border-classic-gold rounded-full p-1 flex-shrink-0">
+                                    <svg viewBox="0 0 100 100" class="w-full h-full">
+                                        <path d="M35,40 L45,15 L55,15 L65,40 Z" fill="#2b2d42" />
+                                        <rect x="42" y="30" width="16" height="5" fill="#c12c1f" />
+                                        <circle cx="50" cy="55" r="22" fill="#fff5eb" stroke="#2b2d42" stroke-width="1.5" />
+                                        <circle cx="43" cy="52" r="2" fill="#2b2d42" />
+                                        <circle cx="57" cy="52" r="2" fill="#2b2d42" />
+                                        <path d="M45,63 Q50,67 55,63" stroke="#2b2d42" stroke-width="1.5" fill="none" />
+                                        <path d="M30,75 L50,65 L70,75" stroke="#2b2d42" stroke-width="2" fill="none" />
+                                        <path d="M47,68 L50,80 L53,68 Z" fill="#2b2d42" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-classic-red text-base">楚國愛國詩人 ‧ 屈原</h3>
+                                    <span class="text-[10px] bg-red-100 text-classic-red px-1.5 py-0.5 rounded font-bold">主流愛國傳說</span>
+                                </div>
+                            </div>
+                            <p class="text-xs text-classic-charcoal leading-relaxed">
+                                戰國時期楚國大夫屈原，倡導聯齊抗秦。無奈楚王聽信讒言將其流放。當得知楚國都城被秦軍攻破，悲憤交加的屈原於五月初五投汨羅江殉國。
+                            </p>
+                            <p class="text-[11px] text-classic-green bg-green-50 p-2 rounded border border-classic-green/20">
+                                💡 <strong>傳說延伸：</strong> 百姓為了不讓江中魚蝦啃咬其遺體，便用竹葉包著飯糰投入江中（粽子雛形），並賽龍舟打鼓嚇走魚群。
+                            </p>
+                        </div>
+
+                        <!-- 伍子胥 -->
+                        <div id="origin-wuzixu" class="origin-detail hidden flex flex-col gap-2">
+                            <div class="flex items-center gap-3">
+                                <div class="w-16 h-16 bg-classic-paper border border-classic-gold rounded-full p-1 flex-shrink-0">
+                                    <svg viewBox="0 0 100 100" class="w-full h-full">
+                                        <path d="M30,38 Q50,15 70,38 Z" fill="#7f8c8d" />
+                                        <circle cx="50" cy="20" r="4" fill="#d4a373" />
+                                        <circle cx="50" cy="55" r="22" fill="#fff5eb" stroke="#2b2d42" stroke-width="1.5" />
+                                        <path d="M38,48 Q43,45 45,48" stroke="#2b2d42" stroke-width="2" fill="none" />
+                                        <path d="M55,48 Q57,45 62,48" stroke="#2b2d42" stroke-width="2" fill="none" />
+                                        <circle cx="43" cy="53" r="2" fill="#2b2d42" />
+                                        <circle cx="57" cy="53" r="2" fill="#2b2d42" />
+                                        <path d="M45,62 Q50,60 55,62" stroke="#c12c1f" stroke-width="2" fill="none" />
+                                        <path d="M35,60 Q50,85 65,60" fill="none" stroke="#bdc3c7" stroke-width="3" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-classic-red text-base">悲劇名將 ‧ 伍子胥</h3>
+                                    <span class="text-[10px] bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded font-bold">江浙一帶傳說</span>
+                                </div>
+                            </div>
+                            <p class="text-xs text-classic-charcoal leading-relaxed">
+                                春秋吳國名將伍子胥輔佐夫差稱霸，後遭吳王聽信讒言賜死，五月初五其屍體被投入錢塘江中。江浙一帶百姓憐其忠烈，便在該日划龍舟祭祀他。
+                            </p>
+                            <p class="text-[11px] text-classic-green bg-green-50 p-2 rounded border border-classic-green/20">
+                                💡 <strong>傳說延伸：</strong> 江浙學者考證認為，端午節最早的「賽龍舟」實為吳越之地祭祀伍子胥迎濤神的競渡活動演變而來。
+                            </p>
+                        </div>
+
+                        <!-- 曹娥 -->
+                        <div id="origin-caoe" class="origin-detail hidden flex flex-col gap-2">
+                            <div class="flex items-center gap-3">
+                                <div class="w-16 h-16 bg-classic-paper border border-classic-gold rounded-full p-1 flex-shrink-0">
+                                    <svg viewBox="0 0 100 100" class="w-full h-full">
+                                        <circle cx="30" cy="35" r="12" fill="#2b2d42" />
+                                        <circle cx="70" cy="35" r="12" fill="#2b2d42" />
+                                        <rect x="28" y="40" width="44" height="25" fill="#2b2d42" />
+                                        <circle cx="50" cy="55" r="20" fill="#fff5eb" stroke="#2b2d42" stroke-width="1.5" />
+                                        <path d="M50,42 L48,46 L52,46 Z" fill="#c12c1f" />
+                                        <circle cx="43" cy="54" r="1.5" fill="#2b2d42" />
+                                        <circle cx="57" cy="54" r="1.5" fill="#2b2d42" />
+                                        <path d="M47,63 Q50,66 53,63" stroke="#2b2d42" stroke-width="1.5" fill="none" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-classic-red text-base">東漢孝女 ‧ 曹娥</h3>
+                                    <span class="text-[10px] bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded font-bold">孝道文化表率</span>
+                                </div>
+                            </div>
+                            <p class="text-xs text-classic-charcoal leading-relaxed">
+                                東漢孝女曹娥，年僅十四歲。其父於五月五日溺於江中不見屍體，曹娥沿江哭喊十七日。最後亦投江尋父，五日後兩屍相抱浮出。
+                            </p>
+                            <p class="text-[11px] text-classic-green bg-green-50 p-2 rounded border border-classic-green/20">
+                                💡 <strong>傳說延伸：</strong> 後人深感其極致孝心，在江邊建曹娥廟。端午在某些江浙水鄉也是充滿孝思與感念的日子。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 小考問部分完整修復 -->
+                <div class="mt-4 border-t border-dashed border-classic-gold/50 pt-3">
+                    <div class="bg-[#f0eae1] p-3 rounded-lg text-xs">
+                        <div class="font-bold text-classic-red mb-1">📝 趣味小考問</div>
+                        <p id="quiz-question" class="font-bold text-[11px]">請問傳說中因為屍體被投江，而在江浙被祭祀的悲劇將領是誰？</p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="checkAnswer('A', this)" class="bg-white border border-classic-gold rounded p-1 hover:bg-classic-red hover:text-white transition-colors text-[11px] font-bold py-1">屈原</button>
+                            <button onclick="checkAnswer('B', this)" class="bg-white border border-classic-gold rounded p-1 hover:bg-classic-red hover:text-white transition-colors text-[11px] font-bold py-1">伍子胥</button>
+                            <button onclick="checkAnswer('C', this)" class="bg-white border border-classic-gold rounded p-1 hover:bg-classic-red hover:text-white transition-colors text-[11px] font-bold py-1">曹娥</button>
+                        </div>
+                        <p id="quiz-feedback" class="mt-2 font-bold text-classic-green hidden text-center text-[11px] p-1.5 bg-white/60 rounded border border-dashed"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= 2. 民俗百寶箱 (CUSTOM) ================= -->
+            <div id="page-custom" class="page-content hidden flex-col justify-between flex-grow">
+                <div>
+                    <div class="flex items-center justify-between border-b-2 border-classic-gold pb-2 mb-3">
+                        <h2 class="text-lg font-bold text-classic-green flex items-center gap-1">
+                            <span>🎋</span> 端午百寶箱 · 避邪祈福
+                        </h2>
+                        <button onclick="switchPage('home')" class="text-xs bg-classic-gold text-white px-2 py-1 rounded">返回</button>
+                    </div>
+
+                    <div class="space-y-3 max-h-[350px] overflow-y-auto pr-1">
+                        <div class="bg-white p-3 rounded-xl border border-classic-gold/30 flex gap-3 items-center">
+                            <div class="text-3xl bg-green-50 p-2 rounded-lg">🌿</div>
+                            <div class="flex-grow">
+                                <h4 class="font-bold text-classic-green text-sm">掛菖蒲、艾草</h4>
+                                <p class="text-xs text-classic-charcoal mt-0.5">五月被視為惡月。菖蒲形似寶劍，艾草氣味獨特，能驅避邪瘟與蚊蟲。</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-classic-gold/30 flex gap-3 items-center">
+                            <div class="text-3xl bg-red-50 p-2 rounded-lg">🚣</div>
+                            <div class="flex-grow">
+                                <h4 class="font-bold text-classic-red text-sm">划龍舟 (競渡)</h4>
+                                <p class="text-xs text-classic-charcoal mt-0.5">古時南方吳越人祭龍儀式，後與屈原救江傳說融合，成為今日的熱血運動。</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-classic-gold/30 flex gap-3 items-center">
+                            <div class="text-3xl bg-amber-50 p-2 rounded-lg">🎒</div>
+                            <div class="flex-grow">
+                                <h4 class="font-bold text-classic-gold text-sm">佩戴香包</h4>
+                                <p class="text-xs text-classic-charcoal mt-0.5">內裝硃砂、雄黃、香藥草等，佩在胸前防蟲避疫，亦是美麗傳統配飾。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-3 bg-classic-green/10 p-3 rounded-xl border border-classic-green/30 text-center">
+                    <p class="text-xs font-bold text-classic-green">✨ 端午驅邪儀式體驗 ✨</p>
+                    <p class="text-[11px] text-classic-charcoal my-1">點擊下方按鈕，在門上掛上你的平安菖蒲！</p>
+                    <div class="flex justify-center my-2">
+                        <div class="relative w-12 h-12 border-2 border-amber-800 rounded bg-amber-100 flex items-center justify-center">
+                            <span class="text-xl">🚪</span>
+                            <div id="mugwort" class="absolute -top-1 font-bold text-lg transition-all duration-500 scale-0 opacity-0">🌿</div>
+                        </div>
+                    </div>
+                    <button onclick="hangMugwort()" id="btn-hang" class="bg-classic-green text-white text-xs px-3 py-1.5 rounded-full font-bold shadow hover:bg-green-700">掛上菖蒲艾草</button>
+                </div>
+            </div>
+
+            <!-- ================= 3. 台灣粽子大觀 (ZONGZI) ================= -->
+            <div id="page-zongzi" class="page-content hidden flex-col justify-between flex-grow">
+                <div>
+                    <div class="flex items-center justify-between border-b-2 border-classic-gold pb-2 mb-3">
+                        <h2 class="text-lg font-bold text-classic-gold flex items-center gap-1">
+                            <span class="flex items-center justify-center w-5 h-5 inline-block">
+                                <svg viewBox="0 0 100 100" class="w-full h-full fill-current text-classic-gold">
+                                    <path d="M50,15 L15,80 Q50,95 85,80 Z" />
+                                    <path d="M40,55 Q50,62 60,55" stroke="#fff" stroke-width="4" fill="none" />
+                                </svg>
+                            </span>
+                            <span>台灣粽之美 · 靈魂大對決</span>
+                        </h2>
+                        <button onclick="switchPage('home')" class="text-xs bg-classic-gold text-white px-2 py-1 rounded">返回</button>
+                    </div>
+
+                    <div class="grid grid-cols-4 gap-1 mb-3">
+                        <button onclick="showZongzi('north')" id="btn-z-north" class="zongzi-tab py-1.5 text-[11px] font-bold rounded border border-classic-gold bg-classic-gold text-white">北部粽</button>
+                        <button onclick="showZongzi('south')" id="btn-z-south" class="zongzi-tab py-1.5 text-[11px] font-bold rounded border border-classic-gold text-classic-charcoal bg-white">南部粽</button>
+                        <button onclick="showZongzi('alkaline')" id="btn-z-alkaline" class="zongzi-tab py-1.5 text-[11px] font-bold rounded border border-classic-gold text-classic-charcoal bg-white">鹼粽</button>
+                        <button onclick="showZongzi('hakka')" id="btn-z-hakka" class="zongzi-tab py-1.5 text-[11px] font-bold rounded border border-classic-gold text-classic-charcoal bg-white">客家粽</button>
+                    </div>
+
+                    <div class="bg-white p-3 rounded-xl border border-classic-gold/50 shadow-inner min-h-[220px]">
+                        <!-- 北部粽 -->
+                        <div id="zongzi-north" class="zongzi-desc flex flex-col gap-2">
+                            <div class="flex justify-between items-center">
+                                <h3 class="font-black text-classic-red text-sm">【北部粽】蒸煮神髓 · 粒粒分明</h3>
+                                <span class="text-[10px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded font-bold">3D油飯</span>
+                            </div>
+                            <p class="text-xs text-classic-charcoal leading-relaxed">
+                                <strong>特色：</strong> 將糯米先與醬油、五香粉、蔥頭等拌炒至半熟，包入炒好的五花肉、香菇、鹹蛋黃、蝦米等。最後用<strong>黃褐色筍殼</strong>包裹上籠蒸熟。
+                            </p>
+                            <p class="text-xs text-classic-green">
+                                🥣 <strong>口感：</strong> 米粒Q彈、咬勁十足，充滿濃郁的炒醬香氣與蝦米香。
+                            </p>
+                        </div>
+
+                        <!-- 南部粽 -->
+                        <div id="zongzi-south" class="zongzi-desc hidden flex flex-col gap-2">
+                            <div class="flex justify-between items-center">
+                                <h3 class="font-black text-classic-green text-sm">【南部粽】水煮溫潤 · 軟糯綿密</h3>
+                                <span class="text-[10px] bg-green-100 text-green-800 px-1.5 py-0.5 rounded font-bold">花生粉經典</span>
+                            </div>
+                            <p class="text-xs text-classic-charcoal leading-relaxed">
+                                <strong>特色：</strong> 將<strong>生糯米</strong>與醃漬豬肉、栗子、花生、鹹蛋黃等直接包入<strong>綠色麻竹葉</strong>中。接著整串放入大滾水中煮熟。
+                            </p>
+                            <p class="text-xs text-classic-green">
+                                🥣 <strong>口感：</strong> 帶有淡淡竹葉清香，米質黏密軟綿，通常會淋上特製油膏並灑上香濃的花生粉！
+                            </p>
+                        </div>
+
+                        <!-- 鹼粽 -->
+                        <div id="zongzi-alkaline" class="zongzi-desc hidden flex flex-col gap-2">
+                            <div class="flex justify-between items-center">
+                                <h3 class="font-black text-yellow-600 text-sm">【鹼粽】冰涼Q彈 · 甜香沁人</h3>
+                                <span class="text-[10px] bg-yellow-100 text-yellow-800 px-1.5 py-0.5 rounded font-bold">夏日甜品</span>
+                            </div>
+                            <p class="text-xs text-classic-charcoal leading-relaxed">
+                                <strong>特色：</strong> 在圓糯米中加入鹼粉攪拌包裹。煮熟後糯米融為一體，呈現半透明的金黃色，質地如琥珀果凍般滑嫩。
+                            </p>
+                            <p class="text-xs text-classic-green">
+                                🥣 <strong>口感：</strong> 放涼冰鎮後食用，沾上白砂糖、蜂蜜或黑糖蜜，清涼又消暑。
+                            </p>
+                        </div>
+
+                        <!-- 客家粽 -->
+                        <div id="zongzi-hakka" class="zongzi-desc hidden flex flex-col gap-2">
+                            <div class="flex justify-between items-center">
+                                <h3 class="font-black text-purple-700 text-sm">【客家粿粽】粄脆鹹香 · 嚼勁十足</h3>
+                                <span class="text-[10px] bg-purple-100 text-purple-800 px-1.5 py-0.5 rounded font-bold">傳統米食</span>
+                            </div>
+                            <p class="text-xs text-classic-charcoal leading-relaxed">
+                                <strong>特色：</strong> 將糯米磨成漿、壓乾脫水做成「粄脆」，揉搓成團，中間包入炒香的香菇、絞肉、蘿蔔乾、蝦米。葉子塗抹少許油後蒸熟。
+                            </p>
+                            <p class="text-xs text-classic-green">
+                                🥣 <strong>口感：</strong> 吃起來外皮極富彈性，帶有濃郁的客家蘿蔔乾鹹香！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 粽子投票大賽 -->
+                <div class="mt-4 p-3 bg-classic-paper border border-dashed border-classic-gold rounded-lg">
+                    <div class="text-center font-bold text-xs text-classic-red mb-2">💥 世紀對決！你支持哪一派？</div>
+                    <div class="flex justify-around items-center gap-2">
+                        <button onclick="voteZongzi('north')" class="flex-grow bg-amber-600 text-white text-xs py-1.5 px-2 rounded font-bold shadow hover:bg-amber-700">
+                            👍 支持北部粽 (<span id="vote-north-count">128</span>)
+                        </button>
+                        <div class="text-xs font-bold text-classic-gold">VS</div>
+                        <button onclick="voteZongzi('south')" class="flex-grow bg-green-700 text-white text-xs py-1.5 px-2 rounded font-bold shadow hover:bg-green-800">
+                            👍 支持南部粽 (<span id="vote-south-count">135</span>)
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= 4. 端陽遊藝房 (PLAY) ================= -->
+            <div id="page-play" class="page-content hidden flex-col justify-between flex-grow">
+                <div>
+                    <div class="flex items-center justify-between border-b-2 border-classic-gold pb-2 mb-3">
+                        <h2 class="text-lg font-bold text-classic-clay flex items-center gap-1">
+                            <span>🥚</span> 端陽遊藝 · 趣味挑戰
+                        </h2>
+                        <button onclick="switchPage('home')" class="text-xs bg-classic-gold text-white px-2 py-1 rounded">返回</button>
+                    </div>
+
+                    <!-- 遊戲切換 -->
+                    <div class="flex justify-center gap-4 mb-4">
+                        <button onclick="switchGame('egg')" id="btn-game-egg" class="game-tab flex-1 bg-classic-clay text-white text-xs font-bold py-1.5 rounded-full border border-classic-clay">
+                            端陽立蛋挑戰
+                        </button>
+                        <button onclick="switchGame('sachet')" id="btn-game-sachet" class="game-tab flex-1 bg-white text-classic-charcoal text-xs font-bold py-1.5 rounded-full border border-classic-clay/50">
+                            手作虛擬香包
+                        </button>
+                    </div>
+
+                    <!-- 遊戲1：端陽立蛋 -->
+                    <div id="game-container-egg" class="game-area flex flex-col items-center gap-3">
+                        <p class="text-[11px] text-classic-charcoal text-center leading-relaxed">
+                            端午節正午十二點陽氣最盛，此時最容易立蛋。成功的人能獲得一整年的好運！
+                        </p>
+                        <div class="relative w-full h-44 bg-blue-50/50 rounded-2xl border border-blue-200 flex flex-col items-center justify-center overflow-hidden">
+                            <div class="absolute bottom-0 w-full h-12 bg-blue-200/40 rounded-b-2xl"></div>
+                            <div id="game-egg" class="relative z-10 transition-transform duration-100 ease-out origin-bottom" style="transform: rotate(25deg);">
+                                <svg viewBox="0 0 100 120" class="w-16 h-20 drop-shadow-md">
+                                    <path d="M50,10 C25,10 15,60 15,90 C15,110 85,110 85,90 C85,60 75,10 50,10 Z" fill="#fff5eb" stroke="#d4a373" stroke-width="2" />
+                                    <circle cx="42" cy="70" r="2.5" fill="#2b2d42" />
+                                    <circle cx="58" cy="70" r="2.5" fill="#2b2d42" />
+                                    <path d="M48,80 Q50,83 52,80" stroke="#2b2d42" stroke-width="1.5" fill="none" />
+                                </svg>
+                            </div>
+                            <div class="absolute bottom-3 w-4/5 h-2 bg-gray-200 rounded-full flex items-center justify-center">
+                                <div id="egg-pointer" class="absolute w-4 h-4 bg-classic-red rounded-full shadow border-2 border-white transition-all duration-100" style="left: calc(50% - 8px);"></div>
+                                <div class="absolute w-2 h-4 bg-classic-green" style="left: calc(50% - 4px);"></div>
+                            </div>
+                        </div>
+                        <div class="w-full flex flex-col items-center gap-1">
+                            <span id="egg-status" class="text-xs font-bold text-classic-clay">「雞蛋開始傾斜了！」</span>
+                            <div class="flex gap-2 w-full mt-1">
+                                <button onclick="tiltEgg(-8)" class="flex-1 bg-amber-500 text-white py-1.5 rounded font-bold text-xs shadow">往左扶 👈</button>
+                                <button onclick="tryStandEgg()" class="flex-1 bg-classic-green text-white py-1.5 rounded font-bold text-xs shadow">立蛋！</button>
+                                <button onclick="tiltEgg(8)" class="flex-1 bg-amber-500 text-white py-1.5 rounded font-bold text-xs shadow">👉 往右扶</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 遊戲2：手作香包 -->
+                    <div id="game-container-sachet" class="game-area hidden flex flex-col items-center gap-2">
+                        <p class="text-[11px] text-classic-charcoal text-center leading-relaxed">
+                            挑選喜歡的「香包配色」與「香草內餡」，特製專屬避邪祈福香包。
+                        </p>
+                        <div class="w-full bg-[#fcf9f2] p-3 rounded-2xl border border-classic-gold/30 flex items-center justify-center min-h-[140px] relative">
+                            <div id="sachet-preview" class="flex flex-col items-center animate-float">
+                                <div id="sachet-svg-wrap" class="w-24 h-24">
+                                    <svg viewBox="0 0 100 100" class="w-full h-full">
+                                        <path d="M50,15 L15,80 Q50,95 85,80 Z" fill="#c12c1f" stroke="#d4a373" stroke-width="2" />
+                                        <path d="M43,45 Q50,52 57,45" stroke="#fff" stroke-width="2" fill="none" />
+                                        <line x1="50" y1="85" x2="50" y2="105" stroke="#d4a373" stroke-width="3" />
+                                    </svg>
+                                </div>
+                                <span id="sachet-summary" class="text-xs font-bold text-classic-red mt-2">【硃砂紅 · 艾草平安包】</span>
+                            </div>
+                        </div>
+                        <div class="w-full space-y-2 mt-1">
+                            <div>
+                                <label class="text-[11px] font-bold text-classic-gold block mb-1">1. 選擇配色</label>
+                                <div class="grid grid-cols-3 gap-1.5">
+                                    <button onclick="configSachet('style', 'red', this)" class="btn-s-style bg-classic-red text-white text-[10px] py-1 rounded">硃砂紅 (經典)</button>
+                                    <button onclick="configSachet('style', 'green', this)" class="btn-s-style bg-white text-classic-charcoal border border-classic-gold text-[10px] py-1 rounded">翡翠綠 (竹香)</button>
+                                    <button onclick="configSachet('style', 'gold', this)" class="btn-s-style bg-white text-classic-charcoal border border-classic-gold text-[10px] py-1 rounded">暖陽金 (富貴)</button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-[11px] font-bold text-classic-gold block mb-1">2. 填入香料</label>
+                                <div class="grid grid-cols-3 gap-1.5">
+                                    <button onclick="configSachet('herb', 'mugwort', this)" class="btn-s-herb bg-classic-gold text-white text-[10px] py-1 rounded">乾燥艾草</button>
+                                    <button onclick="configSachet('herb', 'mint', this)" class="btn-s-herb bg-white text-classic-charcoal border border-classic-gold text-[10px] py-1 rounded">野山薄荷</button>
+                                    <button onclick="configSachet('herb', 'realgar', this)" class="btn-s-herb bg-white text-classic-charcoal border border-classic-gold text-[10px] py-1 rounded">秘製雄黃</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="craftSachet()" class="w-full bg-classic-clay text-white text-xs font-bold py-2 rounded-xl mt-2 shadow">
+                            ✨ 注入靈氣 · 完成香包 ✨
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= 5. 詩詞與科舉 ================= -->
+            <div id="page-poetry" class="page-content hidden flex-col justify-between flex-grow">
+                <div>
+                    <div class="flex items-center justify-between border-b-2 border-classic-blue pb-2 mb-3">
+                        <h2 class="text-lg font-bold text-classic-blue flex items-center gap-1">
+                            <span>📖</span> 詩詞與科舉
+                        </h2>
+                        <button onclick="switchPage('home')" class="text-xs bg-classic-blue text-white px-2 py-1 rounded">返回</button>
+                    </div>
+
+                    <div class="flex justify-center gap-2 mb-3">
+                        <button onclick="switchPoetryTab('dict')" id="tab-poetry-dict" class="flex-1 py-1.5 text-xs font-bold rounded-full bg-classic-blue text-white shadow">
+                            📜 詩詞賞析
+                        </button>
+                        <button onclick="switchPoetryTab('quiz')" id="tab-poetry-quiz" class="flex-1 py-1.5 text-xs font-bold rounded-full bg-white text-classic-charcoal border border-classic-blue/50">
+                            🏮 端陽科舉 (問答)
+                        </button>
+                    </div>
+
+                    <!-- 詩詞辭典區塊 -->
+                    <div id="content-poetry-dict" class="flex flex-col gap-3 max-h-[350px] overflow-y-auto pr-1">
+                        <!-- 詩詞 1 -->
+                        <div class="bg-white p-4 rounded-xl border border-classic-blue/30 relative">
+                            <div class="absolute -top-2 -right-2 bg-blue-100 text-classic-blue text-[10px] px-2 py-0.5 rounded font-bold border border-classic-blue/30">宋 · 蘇軾</div>
+                            <h3 class="font-bold text-sm text-classic-blue mb-1">《浣溪沙·端午》</h3>
+                            <p class="text-xs text-classic-charcoal leading-loose font-serif border-l-2 border-classic-gold pl-2 my-2">
+                                輕汗微微透碧紈，明朝端午浴芳蘭。<br>
+                                流香漲膩滿晴川。<br>
+                                彩線輕纏紅玉臂，小符斜掛綠雲鬟。<br>
+                                佳人相見一千年。
+                            </p>
+                            <div class="bg-blue-50/50 p-2 rounded text-[11px] text-gray-600 mt-2">
+                                💡 <strong>習俗解析：</strong> 詩中提到了沐浴蘭湯（浴芳蘭）、繫五色絲線（彩線）與懸掛辟邪小符的節慶浪漫。
+                            </div>
+                        </div>
+
+                        <!-- 詩詞 2 -->
+                        <div class="bg-white p-4 rounded-xl border border-classic-blue/30 relative">
+                            <div class="absolute -top-2 -right-2 bg-blue-100 text-classic-blue text-[10px] px-2 py-0.5 rounded font-bold border border-classic-blue/30">宋 · 張耒</div>
+                            <h3 class="font-bold text-sm text-classic-blue mb-1">《和端午》</h3>
+                            <p class="text-xs text-classic-charcoal leading-loose font-serif border-l-2 border-classic-gold pl-2 my-2">
+                                競渡深悲千載冤，忠魂一去詎能還。<br>
+                                國亡身殞今何有，只留離騷在世間。
+                            </p>
+                            <div class="bg-blue-50/50 p-2 rounded text-[11px] text-gray-600 mt-2">
+                                💡 <strong>習俗解析：</strong> 指出「賽龍舟（競渡）」是為了悲悼千年前屈原投江的冤屈。
+                            </div>
+                        </div>
+
+                        <!-- 詩詞 3 -->
+                        <div class="bg-white p-4 rounded-xl border border-classic-blue/30 relative">
+                            <div class="absolute -top-2 -right-2 bg-blue-100 text-classic-blue text-[10px] px-2 py-0.5 rounded font-bold border border-classic-blue/30">宋 · 文天祥</div>
+                            <h3 class="font-bold text-sm text-classic-blue mb-1">《端午即事》</h3>
+                            <p class="text-xs text-classic-charcoal leading-loose font-serif border-l-2 border-classic-gold pl-2 my-2">
+                                五月五日午，贈我一枝艾。<br>
+                                故人不可見，新知萬里外。<br>
+                                丹心照夙昔，鬢髮日已改。<br>
+                                我欲從靈均，三湘千萬重。
+                            </p>
+                            <div class="bg-blue-50/50 p-2 rounded text-[11px] text-gray-600 mt-2">
+                                💡 <strong>習俗解析：</strong> 點出端午贈送與懸掛「艾草」的風俗，文中的「靈均」指的是屈原的字。
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 端陽科舉 (問答區塊) -->
+                    <div id="content-poetry-quiz" class="hidden flex-col items-center gap-3">
+                        <div class="w-full bg-[#f4f7f6] p-4 rounded-xl border border-classic-blue/40 flex flex-col items-center min-h-[250px] relative shadow-inner">
+                            <div class="w-full flex justify-between items-center mb-4">
+                                <span class="text-[10px] bg-classic-blue text-white px-2 py-1 rounded font-bold" id="quiz-progress">第 1 / 3 題</span>
+                                <span class="text-[10px] text-classic-charcoal font-bold">積分: <span id="quiz-score" class="text-classic-red">0</span></span>
+                            </div>
+
+                            <div id="quiz-question-container" class="w-full flex-grow flex flex-col justify-center">
+                                <h3 id="quiz-q-text" class="text-sm font-bold text-classic-charcoal leading-relaxed text-center mb-4">
+                                    載入題目中...
+                                </h3>
+                                <div id="quiz-options" class="flex flex-col gap-2 w-full"></div>
+                            </div>
+
+                            <div id="quiz-feedback-container" class="hidden w-full flex-col items-center mt-4 border-t border-classic-blue/20 pt-3">
+                                <div id="quiz-feedback-text" class="text-xs font-bold text-center mb-2"></div>
+                                <button onclick="nextQuizQuestion()" id="btn-next-quiz" class="bg-classic-blue text-white text-xs px-4 py-2 rounded-full font-bold shadow">
+                                    下一題 ➔
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 結算畫面 -->
+                        <div id="quiz-result-container" class="hidden w-full bg-white p-5 rounded-xl border-2 border-classic-gold text-center flex-col items-center">
+                            <div class="text-4xl mb-2">📜</div>
+                            <h3 class="text-lg font-black text-classic-red mb-1">科舉放榜</h3>
+                            <p class="text-xs text-classic-charcoal mb-3">你答對了 <span id="final-score" class="font-bold text-classic-blue text-lg"></span> 題！</p>
+                            <div id="final-title" class="bg-amber-100 text-amber-800 text-sm font-bold px-4 py-1.5 rounded mb-4 border border-amber-300">
+                                稱號：端陽狀元
+                            </div>
+                            <button onclick="startPoetryQuiz()" class="bg-classic-clay text-white text-xs px-5 py-2 rounded-full font-bold shadow">
+                                ↺ 重新挑戰
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 自訂客製化美觀彈窗 -->
+            <div id="classic-modal" class="hidden absolute inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+                <div class="bg-[#fbf7ee] w-4/5 max-w-sm rounded-2xl p-5 border-4 double border-classic-gold shadow-2xl text-center flex flex-col items-center">
+                    <span id="modal-icon" class="text-4xl mb-2">🎉</span>
+                    <h3 id="modal-title" class="text-lg font-bold text-classic-red mb-2">溫馨提示</h3>
+                    <p id="modal-text" class="text-xs text-classic-charcoal leading-relaxed mb-4">消息內容</p>
+                    <button onclick="closeModal()" class="bg-classic-red text-white text-xs px-5 py-1.5 rounded-full font-bold shadow">知道了</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- 底部版權宣告 -->
+    <footer class="text-center text-[10px] text-classic-gold px-4 font-bold tracking-widest mt-2">
+        <div>歲次丙午年 ‧ 仲夏端陽 ‧ 祝君安康</div>
+    </footer>
+
+    <!-- JavaScript 互動邏輯 -->
+    <script>
+        // 頁面切換
+        function switchPage(pageId) {
+            document.querySelectorAll('.page-content').forEach(p => p.classList.add('hidden'));
+            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('flex'));
+            const target = document.getElementById(`page-${pageId}`);
+            target.classList.remove('hidden');
+            target.classList.add('flex');
+
+            if (pageId === 'play') initEggGame();
+            if (pageId === 'poetry') switchPoetryTab('dict');
+        }
+
+        // 1. 端午尋源 - Tab切換
+        function showOrigin(heroId) {
+            document.querySelectorAll('.origin-detail').forEach(d => d.classList.add('hidden'));
+            document.getElementById(`origin-${heroId}`).classList.remove('hidden');
+            document.querySelectorAll('.origin-tab').forEach(b => {
+                b.classList.remove('bg-classic-red', 'text-white');
+                b.classList.add('text-classic-charcoal');
+            });
+            document.getElementById(`tab-${heroId}`).classList.add('bg-classic-red', 'text-white');
+            document.getElementById(`tab-${heroId}`).classList.remove('text-classic-charcoal');
+        }
+
+        // 端午尋源專屬 - 趣味小考問判定邏輯
+        function checkAnswer(answer, element) {
+            const feedback = document.getElementById('quiz-feedback');
+            feedback.classList.remove('hidden');
+            if (answer === 'B') {
+                feedback.innerText = "🎯 恭喜答對！伍子胥被吳王賜死投江，因此江浙一帶端午主要祭祀他。";
+                feedback.className = "mt-2 font-bold text-classic-green text-center text-[11px] p-2 bg-green-50 rounded border border-dashed border-green-300";
+            } else if (answer === 'A') {
+                feedback.innerText = "❌ 答錯囉！屈原因投汨羅江殉國，是全中國最廣為人知的端午主角。";
+                feedback.className = "mt-2 font-bold text-classic-red text-center text-[11px] p-2 bg-red-50 rounded border border-dashed border-red-300";
+            } else {
+                feedback.innerText = "❌ 答錯囉！曹娥是東漢孝女投江尋父，主要是紹興等地的孝道傳說。";
+                feedback.className = "mt-2 font-bold text-classic-red text-center text-[11px] p-2 bg-red-50 rounded border border-dashed border-red-300";
+            }
+        }
+
+        // 2. 懸掛艾草
+        function hangMugwort() {
+            const mugwort = document.getElementById('mugwort');
+            const btn = document.getElementById('btn-hang');
+            if (mugwort.classList.contains('scale-0')) {
+                mugwort.classList.remove('scale-0', 'opacity-0');
+                mugwort.classList.add('scale-100', 'opacity-100');
+                btn.innerText = "收回菖蒲艾草";
+                showCustomModal("🎋 辟邪納福", "門口已高掛菖蒲與艾草，護佑家宅一整年平安順遂！");
+            } else {
+                mugwort.classList.add('scale-0', 'opacity-0');
+                mugwort.classList.remove('scale-100', 'opacity-100');
+                btn.innerText = "掛上菖蒲艾草";
+            }
+        }
+
+        // 3. 台灣肉粽分頁控制
+        function showZongzi(type) {
+            document.querySelectorAll('.zongzi-desc').forEach(d => d.classList.add('hidden'));
+            document.getElementById(`zongzi-${type}`).classList.remove('hidden');
+            document.querySelectorAll('.zongzi-tab').forEach(b => {
+                b.classList.remove('bg-classic-gold', 'text-white');
+                b.classList.add('bg-white', 'text-classic-charcoal');
+            });
+            document.getElementById(`btn-z-${type}`).classList.add('bg-classic-gold', 'text-white');
+            document.getElementById(`btn-z-${type}`).classList.remove('bg-white', 'text-classic-charcoal');
+        }
+
+        // 粽子模擬投票
+        let voteNorth = 128, voteSouth = 135;
+        function voteZongzi(type) {
+            if (type === 'north') {
+                voteNorth++;
+                document.getElementById('vote-north-count').innerText = voteNorth;
+                showCustomModal("🍙", "為香Q飽滿、充滿香氣的北部粽點了個大大的讚！");
+            } else {
+                voteSouth++;
+                document.getElementById('vote-south-count').innerText = voteSouth;
+                showCustomModal("🥜", "為米粒軟糯、必配花生粉的經典南部粽投下熱情的一票！");
+            }
+        }
+
+        // 4. 立蛋遊戲
+        let eggAngle = 25, eggInterval = null, gameActive = false;
+        function initEggGame() {
+            if (eggInterval) clearInterval(eggInterval);
+            eggAngle = 20; gameActive = true; updateEggUI();
+            eggInterval = setInterval(() => {
+                if (!gameActive) return;
+                eggAngle += (eggAngle > 0 ? 1 : -1) * (Math.random() * 2 + Math.abs(eggAngle) * 0.08);
+                if (Math.random() < 0.15) eggAngle += (Math.random() - 0.5) * 10;
+                if (eggAngle > 45) eggAngle = 45; if (eggAngle < -45) eggAngle = -45;
+                updateEggUI();
+                if (Math.abs(eggAngle) >= 45) {
+                    document.getElementById('egg-status').innerText = "哎呀！雞蛋倒了！";
+                    document.getElementById('egg-status').className = "text-xs font-bold text-classic-red";
+                }
+            }, 120);
+        }
+        function updateEggUI() {
+            document.getElementById('game-egg').style.transform = `rotate(${eggAngle}deg)`;
+            let percent = ((eggAngle + 45) / 90) * 100;
+            document.getElementById('egg-pointer').style.left = `calc(${Math.max(0, Math.min(100, percent))}% - 8px)`;
+            const status = document.getElementById('egg-status');
+            if (Math.abs(eggAngle) < 6) status.innerText = "🌟 完美！快點擊「立蛋」！", status.className = "text-xs font-bold text-classic-green animate-wobble";
+            else if (Math.abs(eggAngle) < 15) status.innerText = "⚠️ 晃動中，請按扶穩調整！", status.className = "text-xs font-bold text-classic-gold";
+            else if (Math.abs(eggAngle) < 45) status.innerText = "🚨 快倒了，請快往反向扶！", status.className = "text-xs font-bold text-classic-clay";
+        }
+        function tiltEgg(force) {
+            if (Math.abs(eggAngle) >= 45) { eggAngle = 0; gameActive = true; }
+            else { eggAngle += force; if (eggAngle > 45) eggAngle = 45; if (eggAngle < -45) eggAngle = -45; }
+            updateEggUI();
+        }
+        function tryStandEgg() {
+            if (Math.abs(eggAngle) >= 45) showCustomModal("🥚 倒地了", "先按按鈕扶正蛋寶寶再挑戰！");
+            else if (Math.abs(eggAngle) <= 5) { gameActive = false; clearInterval(eggInterval); showCustomModal("🎉 恭喜成功！", "成功立蛋！大吉大利、好運連連！"); }
+            else showCustomModal("🥚 尚未平穩", "指針要調回最中央的綠色區塊才算立蛋成功喔！");
+        }
+
+        // 手作香包控制
+        let curStyle = 'red', curHerb = 'mugwort';
+        const styleColors = { red: { bg: '#c12c1f', text: '硃砂紅' }, green: { bg: '#2d6a4f', text: '翡翠綠' }, gold: { bg: '#d4a373', text: '暖陽金' } };
+        const herbNames = { mugwort: '艾草平安包', mint: '野山薄荷包', realgar: '秘製雄黃包' };
+        
+        function configSachet(type, val, element) {
+            if (type === 'style') {
+                curStyle = val;
+                document.querySelectorAll('.btn-s-style').forEach(b => {
+                    b.classList.remove('bg-classic-red', 'text-white');
+                    b.classList.add('bg-white', 'text-classic-charcoal', 'border-classic-gold');
+                });
+                element.classList.add('bg-classic-red', 'text-white');
+                element.classList.remove('bg-white', 'text-classic-charcoal', 'border-classic-gold');
+            } else if (type === 'herb') {
+                curHerb = val;
+                document.querySelectorAll('.btn-s-herb').forEach(b => {
+                    b.classList.remove('bg-classic-gold', 'text-white');
+                    b.classList.add('bg-white', 'text-classic-charcoal', 'border-classic-gold');
+                });
+                element.classList.add('bg-classic-gold', 'text-white');
+                element.classList.remove('bg-white', 'text-classic-charcoal', 'border-classic-gold');
+            }
+            updateSachetUI();
+        }
+        
+        function updateSachetUI() {
+            const wrap = document.getElementById('sachet-svg-wrap');
+            const summary = document.getElementById('sachet-summary');
+            const colorData = styleColors[curStyle];
+            const herbData = herbNames[curHerb];
+
+            wrap.innerHTML = `
+                <svg viewBox="0 0 100 100" class="w-full h-full">
+                    <path d="M50,15 L15,80 Q50,95 85,80 Z" fill="${colorData.bg}" stroke="#d4a373" stroke-width="2.5" />
+                    <path d="M38,55 Q50,65 62,55" stroke="#d4a373" stroke-width="1.5" fill="none" opacity="0.8" />
+                    <circle cx="50" cy="15" r="4" fill="none" stroke="#d4a373" stroke-width="2" />
+                    <line x1="50" y1="88" x2="50" y2="108" stroke="#d4a373" stroke-width="3" />
+                </svg>
+            `;
+            summary.innerText = `【${colorData.text} · ${herbData}】`;
+            summary.style.color = colorData.bg;
+        }
+        
+        function craftSachet() {
+            const colorData = styleColors[curStyle];
+            const herbData = herbNames[curHerb];
+            let desc = curHerb === 'mugwort' ? "乾燥艾草能散發自然芳香、驅走蚊病，祈願一整年四季安康！" : 
+                       curHerb === 'mint' ? "薄荷疏散風熱。助你在悶熱盛夏中提神醒腦、一掃胸中暑氣！" : "秘製雄黃辟邪祛蟲，帶在身上，百邪百毒不敢近身！";
+            showCustomModal("🎒 香包編織成功！", `你特製了「${colorData.text} · ${herbData}」。\n\n${desc}`);
+        }
+
+        // 遊戲模組切換
+        function switchGame(gameType) {
+            document.querySelectorAll('.game-area').forEach(g => g.classList.add('hidden'));
+            document.getElementById(`game-container-${gameType}`).classList.remove('hidden');
+
+            document.querySelectorAll('.game-tab').forEach(t => {
+                t.classList.remove('bg-classic-clay', 'text-white');
+                t.classList.add('bg-white', 'text-classic-charcoal', 'border-classic-clay/50');
+            });
+            document.getElementById(`btn-game-${gameType}`).classList.add('bg-classic-clay', 'text-white');
+            document.getElementById(`btn-game-${gameType}`).classList.remove('bg-white', 'text-classic-charcoal', 'border-classic-clay/50');
+        }
+
+        // 5. 詩詞辭典與問答切換
+        function switchPoetryTab(tabId) {
+            if (tabId === 'dict') {
+                document.getElementById('content-poetry-dict').classList.remove('hidden');
+                document.getElementById('content-poetry-quiz').classList.add('hidden');
+                document.getElementById('tab-poetry-dict').className = "flex-1 py-1.5 text-xs font-bold rounded-full bg-classic-blue text-white shadow";
+                document.getElementById('tab-poetry-quiz').className = "flex-1 py-1.5 text-xs font-bold rounded-full bg-white text-classic-charcoal border border-classic-blue/50";
+            } else {
+                document.getElementById('content-poetry-dict').classList.add('hidden');
+                document.getElementById('content-poetry-quiz').classList.remove('hidden');
+                document.getElementById('tab-poetry-quiz').className = "flex-1 py-1.5 text-xs font-bold rounded-full bg-classic-blue text-white shadow";
+                document.getElementById('tab-poetry-dict').className = "flex-1 py-1.5 text-xs font-bold rounded-full bg-white text-classic-charcoal border border-classic-blue/50";
+                startPoetryQuiz();
+            }
+        }
+
+        const quizData = [
+            {
+                question: "蘇軾詩句「彩線輕纏紅玉臂」中，提到的「彩線」代表端午節的哪一項習俗？",
+                options: ["包粽子綁的繩子", "繫五色絲線祈福", "手作香包的繡線"],
+                correct: 1,
+                explanation: "古人在端午會用五色絲線繫在手臂上，寓意驅邪避瘟、祈求長命。"
+            },
+            {
+                question: "張耒的詩句寫道：「只留離騷在世間」。請問《離騷》是哪一位歷史人物的不朽名篇？",
+                options: ["李白", "伍子胥", "屈原"],
+                correct: 2,
+                explanation: "《離騷》是戰國時期楚國詩人屈原的代表作，也是中國古典文學的瑰寶。"
+            },
+            {
+                question: "文天祥《端午即事》中寫道：「五月五日午，贈我一枝____」，空格中應填入哪種能驅邪的植物？",
+                options: ["艾", "梅", "竹"],
+                correct: 0,
+                explanation: "端午節有懸掛與贈送「艾草」的習俗，因為艾草的特殊氣味能驅趕蚊蟲與邪氣。"
+            },
+            {
+                question: "傳說中「飲了____酒，百病都遠走」，請問端午節傳統上會飲用什麼酒來避邪？",
+                options: ["桂花酒", "菊花酒", "雄黃酒"],
+                correct: 2,
+                explanation: "古人認為雄黃能殺百毒，因此端午會飲雄黃酒或在額頭畫王字避邪（現代醫學提醒雄黃含砷有毒，一般僅在皮膚塗抹不建議直接飲用喔）。"
+            }
+        ];
+
+        let currentQuizIndex = 0, currentScore = 0, selectedQuestions = [];
+        function startPoetryQuiz() {
+            let shuffled = [...quizData].sort(() => 0.5 - Math.random());
+            selectedQuestions = shuffled.slice(0, 3);
+            currentQuizIndex = 0; currentScore = 0;
+            document.getElementById('quiz-result-container').classList.add('hidden');
+            document.getElementById('quiz-question-container').classList.remove('hidden');
+            updateQuizScoreUI();
+            renderQuizQuestion();
+        }
+        function renderQuizQuestion() {
+            const qData = selectedQuestions[currentQuizIndex];
+            document.getElementById('quiz-progress').innerText = `第 ${currentQuizIndex + 1} / 3 題`;
+            document.getElementById('quiz-q-text').innerText = qData.question;
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+            qData.options.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left bg-white border border-classic-blue/30 p-3 rounded-lg text-xs font-bold text-classic-charcoal hover:bg-blue-50 transition quiz-opt-btn";
+                btn.innerText = `${String.fromCharCode(65 + index)}. ${opt}`;
+                btn.onclick = () => answerQuiz(index, btn);
+                optionsContainer.appendChild(btn);
+            });
+            document.getElementById('quiz-feedback-container').classList.add('hidden');
+        }
+        function answerQuiz(selectedIndex, btnElement) {
+            const allBtns = document.querySelectorAll('.quiz-opt-btn');
+            allBtns.forEach(btn => btn.onclick = null);
+            const qData = selectedQuestions[currentQuizIndex];
+            const feedbackContainer = document.getElementById('quiz-feedback-container');
+            const feedbackText = document.getElementById('quiz-feedback-text');
+            feedbackContainer.classList.remove('hidden');
+            if (selectedIndex === qData.correct) {
+                currentScore++; updateQuizScoreUI();
+                btnElement.classList.replace('bg-white', 'bg-green-100');
+                btnElement.classList.replace('border-classic-blue/30', 'border-green-500');
+                feedbackText.innerHTML = `✅ 答對了！<br><span class="text-[10px] text-gray-600 font-normal">${qData.explanation}</span>`;
+                feedbackText.className = "text-xs font-bold text-center mb-2 text-green-700";
+            } else {
+                btnElement.classList.replace('bg-white', 'bg-red-100');
+                btnElement.classList.replace('border-classic-blue/30', 'border-red-500');
+                allBtns[qData.correct].classList.replace('bg-white', 'bg-green-50');
+                allBtns[qData.correct].classList.add('border-green-400');
+                feedbackText.innerHTML = `❌ 答錯了，正確答案是 ${String.fromCharCode(65 + qData.correct)}。<br><span class="text-[10px] text-gray-600 font-normal">${qData.explanation}</span>`;
+                feedbackText.className = "text-xs font-bold text-center mb-2 text-classic-red";
+            }
+            document.getElementById('btn-next-quiz').innerText = currentQuizIndex === selectedQuestions.length - 1 ? "查看放榜結果 ➔" : "下一題 ➔";
+        }
+        function nextQuizQuestion() {
+            currentQuizIndex++;
+            if (currentQuizIndex < selectedQuestions.length) renderQuizQuestion();
+            else showQuizResult();
+        }
+        function showQuizResult() {
+            document.getElementById('quiz-question-container').classList.add('hidden');
+            document.getElementById('quiz-feedback-container').classList.add('hidden');
+            const resultContainer = document.getElementById('quiz-result-container');
+            resultContainer.classList.remove('hidden');
+            resultContainer.classList.add('flex');
+            document.getElementById('final-score').innerText = currentScore;
+            const titleBox = document.getElementById('final-title');
+            if (currentScore === 3) titleBox.innerText = "👑 稱號：端陽狀元 (學富五車)", titleBox.className = "bg-yellow-100 text-yellow-800 text-sm font-bold px-4 py-1.5 rounded mb-4 border border-yellow-400 animate-float";
+            else if (currentScore === 2) titleBox.innerText = "🌟 稱號：端陽進士 (略有小成)", titleBox.className = "bg-blue-100 text-blue-800 text-sm font-bold px-4 py-1.5 rounded mb-4 border border-blue-400";
+            else titleBox.innerText = "📚 稱號：端陽書僮 (需多看詩詞)", titleBox.className = "bg-gray-100 text-gray-600 text-sm font-bold px-4 py-1.5 rounded mb-4 border border-gray-300";
+        }
+        function updateQuizScoreUI() { document.getElementById('quiz-score').innerText = currentScore; }
+
+        // 彈窗
+        function showCustomModal(title, text, icon = "✨") {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-text').innerText = text;
+            document.getElementById('modal-icon').innerText = icon;
+            document.getElementById('classic-modal').classList.remove('hidden');
+        }
+        function closeModal() { document.getElementById('classic-modal').classList.add('hidden'); }
+    </script>
+</body>
+</html>
